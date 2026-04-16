@@ -78,7 +78,7 @@ PageRank-Visualizer/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/PageRank-Visualizer.git
+git clone https://github.com/CJC1406/PageRank-Visualizer.git
 cd PageRank-Visualizer
 ```
 
