@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PageRank Algorithm Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="d3-container" class="network-background"></div>
+    <div class="background-elements">
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="blob blob3"></div>
+    </div>
+
+    <div class="container glass-panel main-container">
+        <header>
+            <h1>PageRank Visualizer</h1>
+            <p>Using Linear Algebra to rank pages dynamically</p>
+        </header>
+
+        <div class="top-row">
+            <!-- Controls Panel -->
+            <div class="controls-panel glass-panel">
+                <h2>Graph & Settings</h2>
+
+                <div class="input-group">
+                    <label>Generate Sample</label>
+                    <button id="random-graph-btn" class="glass-btn secondary">Random Graph Generator</button>
+                    <p class="helper-text">Auto-creates websites & random links</p>
+                </div>
+
+                <div class="input-group" style="margin-top: 1rem;">
+                    <label>Add Link (Source &rarr; Destination)</label>
+                    <div class="edge-inputs">
+                        <input type="text" id="node-from" placeholder="E.g. google.com">
+                        <span class="arrow">&rarr;</span>
+                        <input type="text" id="node-to" placeholder="E.g. wiki.org">
+                        <button id="add-edge-btn" class="glass-btn">Add</button>
+                    </div>
+                </div>
+
+                <div class="edges-list-container">
+                    <h3>Current Links</h3>
+                    <ul id="edges-list"></ul>
+                </div>
+
+                <div class="input-group slider-group">
+                    <label title="Probability of following a link">Damping Factor (d): <span
+                            id="d-value">0.85</span></label>
+                    <input type="range" id="d-slider" min="0.5" max="0.99" step="0.01" value="0.85">
+                </div>
+
+                <div class="actions">
+                    <button id="calculate-btn" class="glass-btn primary calculate-btn">🚀 Calculate PageRank</button>
+                    <button id="clear-btn" class="glass-btn secondary outline">Clear</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="middle-row">
+            <!-- Rankings Table -->
+            <div class="results-panel glass-panel">
+                <h2>🏆 Website Rankings</h2>
+                <div class="table-container">
+                    <table id="rankings-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Website</th>
+                                <th>PageRank Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Results inject here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Iterations Chart -->
+            <div class="chart-panel glass-panel">
+                <h2>📈 Iteration Convergence</h2>
+                <div class="canvas-wrapper">
+                    <canvas id="convergence-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-row">
+            <!-- Math Breakdown -->
+            <div class="math-panel glass-panel">
+                <h2>The Math Behind It</h2>
+                <div class="math-equation">
+                    r = dMr + <span>1-d</span> / <span>n</span> <b>1</b>
+                </div>
+
+                <div class="matrices-container">
+                    <div class="matrix-box">
+                        <h3>Adjacency Matrix (A)</h3>
+                        <p class="helper-text">1 if page j links to i</p>
+                        <div id="matrix-a" class="matrix-display">Run calculation to view...</div>
+                    </div>
+                    <div class="matrix-box">
+                        <h3>Stochastic Transition (M')</h3>
+                        <p class="helper-text">Probabilities + Damping</p>
+                        <div id="matrix-m" class="matrix-display">Run calculation to view...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

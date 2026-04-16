@@ -1,0 +1,265 @@
+
+:root {
+  --bg:          #0a0d14;
+  --surface:     rgba(255,255,255,0.04);
+  --surface-hov: rgba(255,255,255,0.07);
+  --border:      rgba(255,255,255,0.08);
+  --border-sel:  rgba(129,140,248,0.6);
+  --accent:      #818cf8;
+  --accent-2:    #c084fc;
+  --green:       #34d399;
+  --text-1:      #f1f5f9;
+  --text-2:      #94a3b8;
+  --text-3:      #475569;
+  --radius:      16px;
+  --radius-sm:   10px;
+  --shadow:      0 8px 32px rgba(0,0,0,0.4);
+  --transition:  0.25s cubic-bezier(0.4,0,0.2,1);
+
+  /* Legacy Maps */
+  --glass-bg: var(--surface);
+  --glass-border: var(--border);
+  --text-primary: var(--text-1);
+  --text-secondary: var(--text-2);
+  --primary-color: var(--accent);
+  --primary-hover: var(--accent-2);
+  --gold: #fbbf24;
+  --silver: #9ca3af;
+  --bronze: #b45309;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--bg);
+    color: var(--text-1);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    padding: 0;
+}
+
+
+
+.background-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.blob {
+    position: absolute;
+    filter: blur(100px);
+    opacity: 0.15;
+    animation: float 10s infinite alternate;
+    border-radius: 50%;
+}
+
+.blob1 { top: -10%; left: -10%; width: 500px; height: 500px; background: var(--accent); }
+.blob2 { bottom: -10%; right: -10%; width: 400px; height: 400px; background: var(--accent-2); animation-delay: -3s; }
+.blob3 { top: 40%; left: 40%; width: 300px; height: 300px; background: var(--green); animation-delay: -6s; }
+
+@keyframes float {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(30px) scale(1.05); }
+}
+
+.glass-panel {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.08); /* Faint border */
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+
+.main-container {
+    width: 100%;
+    margin: 0;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    letter-spacing: -0.5px;
+}
+
+
+
+header p { color: var(--text-3); font-size: 0.9rem; margin-top: 0.5rem; font-weight: 500; letter-spacing: 0.5px; }
+
+h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.2rem;
+    color: var(--text-1);
+}
+
+.top-row, .middle-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1.5rem;
+}
+.middle-row { grid-template-columns: 1fr 1fr; }
+
+@media (max-width: 900px) {
+    .top-row, .middle-row { grid-template-columns: 1fr; }
+}
+
+/* Controls */
+.input-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.input-group label { font-weight: 600; font-size: 0.85rem; color: var(--text-2); }
+.helper-text { font-size: 0.75rem; color: var(--text-3); }
+.edge-inputs { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.arrow { color: var(--text-3); font-weight: bold; }
+
+input[type="text"] {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.7rem;
+    color: var(--text-1);
+    width: 140px;
+    outline: none;
+    transition: all var(--transition);
+}
+input[type="text"]:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(129,140,248,0.25); }
+
+.slider-group { margin-top: 1rem; }
+input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+}
+
+.glass-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-1);
+    border: 1px solid var(--border);
+    padding: 0.7rem 1.2rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.glass-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(129,140,248,0.4); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.glass-btn.primary { 
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); 
+    border: none; 
+    box-shadow: 0 4px 20px rgba(129,140,248,0.35);
+}
+.glass-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(129,140,248,0.5); }
+.glass-btn.secondary { background: rgba(255, 255, 255, 0.03); }
+.calculate-btn { font-size: 1rem; padding: 1rem; margin-top: auto; letter-spacing: 0.5px;}
+.actions { display: flex; gap: 1rem; margin-top: 1rem; }
+
+.edges-list-container {
+    flex-grow: 1;
+    max-height: 200px;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.2);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 1px solid var(--border);
+}
+#edges-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.edge-item {
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 6px;
+    font-size: 0.9rem; border: 1px solid var(--border);
+}
+.delete-btn {
+    background: none; border: none; color: #fb7185; cursor: pointer; font-size: 1.2rem; font-weight: bold;
+    transition: transform 0.2s;
+}
+.delete-btn:hover { color: #fda4af; transform: scale(1.2); }
+
+/* Visualization Panel Background */
+#d3-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: -2;
+    background: transparent;
+    pointer-events: none; /* Let clicks pass through onto nodes only if configured, but nodes need events! */
+}
+/* If we want the nodes to be interactive, we should make the panels pointer-events: none and the internal elements pointer-events: auto. But easier: just keep d3-container behind. Wait, if it's z-index -2 it's behind the body content. It will be interactive where the transparent panels don't physically block it, or we just leave it visual */
+.visualization-panel { display: none; } /* Removed from DOM mostly, hide just in case */
+.top-node circle {
+    stroke: var(--gold);
+    stroke-width: 3px;
+    filter: drop-shadow(0 0 12px var(--gold));
+}
+.tooltip {
+    position: absolute; padding: 8px 12px; background: rgba(10, 13, 20, 0.95);
+    color: var(--text-1); border-radius: 8px; pointer-events: none; opacity: 0;
+    border: 1px solid rgba(129,140,248,0.3); z-index: 10; font-size: 0.85rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* Rankings Table */
+.table-container { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px 8px; text-align: left; border-bottom: 1px solid var(--border); }
+th { color: var(--text-3); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.progress-cell { width: 50%; }
+.progress-bar-container {
+    width: 100%; background: rgba(255,255,255,0.05); height: 10px; border-radius: 99px; overflow: hidden;
+    position: relative; display: flex; align-items: center;
+}
+.progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); 
+    transition: width 0.8s cubic-bezier(0.4,0,0.2,1); width: 0%; border-radius: 99px;
+}
+.progress-text {
+    position: absolute; right: 0; top: -18px; font-size: 0.7rem; font-weight: 700; color: var(--text-2);
+}
+
+.medal { font-size: 1.2rem; margin-right: 0.5rem; display: inline-block; text-align: center; }
+
+/* Charts & Math */
+.canvas-wrapper { width: 100%; min-height: 300px; }
+.math-equation {
+    background: transparent; padding: 1rem; border-radius: var(--radius-sm);
+    text-align: center; font-family: 'Courier New', monospace; font-size: 1.2rem;
+    margin-bottom: 1.5rem; color: var(--accent); letter-spacing: 1px;
+    border: 1px solid var(--border);
+}
+.math-equation span { color: var(--accent-2); }
+.math-equation b { color: var(--gold); }
+
+.matrices-container { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 768px) { .matrices-container { grid-template-columns: 1fr; } }
+
+.matrix-box { background: transparent; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+.matrix-box h3 { font-size: 0.9rem; margin-bottom: 0.2rem; color: var(--text-2); }
+.matrix-display {
+    font-family: 'Courier New', monospace; background: transparent; padding: 1rem; border-radius: 8px;
+    overflow-x: auto; margin-top: 1rem; white-space: pre; line-height: 1.5; color: var(--green); font-size: 0.85rem;
+}
